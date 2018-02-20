@@ -1,0 +1,46 @@
+<h1> Ingresa un nuevo producto </h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Categoría:</strong>
+  <%= @category.name %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+
+<%= form_with model: [ @category, Product.new ], local: true do |f| %>
+<div class='form-group'>
+  <%= f.label :nombre %>
+  <%= f.text_field :name, id: :product_name %>
+</div>
+<div class='form-group'>
+  <%= f.label :precio %>
+  <%= f.text_field :price, id: :product_price %>
+</div>
+  <%= f.submit :enviar, class:'btn btn-primary' %>
+<% end %>
+
+<br>
+
+<!-- Listando de productos  -->
+<h5>Lista de productos</h5>
+<table>
+  <tr>
+    <th>Nombre producto</th>
+    <th>Precio </th>
+  </tr>
+  <% @category.products.each do |product| %>
+  <tr>
+    <td> <%= product.name %></td> 
+    <td> <%= product.price %></td>
+    <td> <%= link_to 'Borrar Producto', category_product_path(@category, product), method: :delete, class:'btn btn-danger btn-sm text-light'  %></td>  
+  </tr>
+  <% end %>
+
+</table>
+  
+  
+</ul>
+
